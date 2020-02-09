@@ -1,0 +1,21 @@
+#app {
+  min-height: 100vh;
+  //background-color:silver;
+  display:flex;
+}
+.login-hdr {
+  padding: 15px;
+}
+.login-form {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+  height: 100%;
+  text-align: left;
+}
+.login-page {
+  width: 330px;
+  text-align: center;
+  margin: auto;
+}
