@@ -11,12 +11,11 @@ class Navigation extends React.Component {
                 <li>
                     <NavLink to={"/"} activeClassName={"active"} exact={true} className={"nav-link"}>Dashboard</NavLink>
                 </li>
-                <li>
-                    <NavLink to={"/some"} activeClassName={"active"} className={"nav-link"}>Webshop</NavLink>
-                </li>
-                <li>
-                    <NavLink to={"/some2"} activeClassName={"active"} className={"nav-link"}>About</NavLink>
-                </li>
+                {auth.authenticated &&
+                    <li>
+                        <NavLink to={"/orders"} activeClassName={"active"} className={"nav-link"}>Orders</NavLink>
+                    </li>
+                }
                 {admin &&
                     <li>
                         <NavLink to={"/admin/dashboard"} activeClassName={"active"} className={"nav-link"}>Admin</NavLink>

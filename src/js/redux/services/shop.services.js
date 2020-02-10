@@ -1,5 +1,5 @@
-import axios from 'axios';
 import {shopActions} from './../modules/shop';
+import {serverCall} from './common.services';
 
 const products = [
     {
@@ -76,28 +76,33 @@ const products = [
     }
 ];
 
-const fetchProducts = (searchObj) => {
-    return function (dispatch) {
-        dispatch(shopActions.fetchProducts(searchObj));
+const getProducts = (searchObj) => dispatch => {
+    dispatch(shopActions.getProducts(searchObj));
+    return serverCall({
+        method: 'POST',
+        url: '/products/all'
+    })
+        .then(res => {
+            dispatch(shopActions.getProductsSuccess(res.data));
+        })
+        .catch(error => {
+            dispatch(shopActions.getProductsFailure(error));
+        })
+};
 
-        //mocked
-        setTimeout(function () {
-            dispatch(shopActions.setProducts(products));
-        }, 2000);
-
-        // axios.get("http://index.hr")
-        //     .then( result =>{
-        //        //call some redux module action
-        //       dispatch(shopActions.setProducts(products));
-        //
-        //     })
-        //     .catch(error=>{
-        //         //call some redux module action for error handle
-        //         //TODO nmaric remove mocked data set
-        //         console.error("ERROR fetching products from server!");
-        //         dispatch(shopActions.setProducts(products));
-        //     });
-    }
+const addProduct = (product) => dispatch => {
+    dispatch(shopActions.addProduct());
+    return serverCall({
+        method: 'POST',
+        url: '/products/add',
+        data: product
+    })
+        .then(res => {
+            dispatch(shopActions.addProductSuccess(res.data));
+        })
+        .catch(error => {
+            dispatch(shopActions.addProductFailure(error));
+        })
 };
 
 const addToWishList = (item) => {
@@ -112,9 +117,24 @@ const addToCart = (item) => {
     }
 };
 
+const order = (cart) => dispatch => {
+    dispatch(shopActions.order());
+    return serverCall({
+        method: 'POST',
+        url: '/orders/saveorder',
+        data: {productDtos: cart}
+    })
+        .then(res => {
+            dispatch(shopActions.orderSuccess(res.data));
+        })
+        .catch(error => {
+            dispatch(shopActions.orderFailure(error));
+        })
+};
 
 export {
-    fetchProducts,
+    getProducts,
+    addProduct,
     addToCart,
-    addToWishList
+    order
 }

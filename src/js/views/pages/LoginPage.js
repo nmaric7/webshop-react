@@ -20,7 +20,7 @@ class LoginPage extends Component {
         }
 
         return (
-            <div className={'login-page'}>
+            <div className={'container login-page'}>
                 <h2 className={'text-center'} style={{'padding': '20px'}}>
                     <span className={'font-weight-bold'}>Webshop</span>.com
                 </h2>

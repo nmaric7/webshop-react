@@ -2,14 +2,20 @@ import React from 'react';
 import cartImage from "../../../images/cart.png";
 import {NavLink} from "react-router-dom";
 
-class CartInfo extends React.Component {
+function mapStateToProps(state) {
+    return {
+        cart: state.shop.cart
+    };
+}
+
+class Cart extends React.Component {
     render() {
         const {cart} = this.props;
-
         const sum = cart.map(e => e.price).reduce((a, b) => a + b, 0);
 
         return (
             <div className="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+
                 <div className="cart">
                     <div
                         className="cart_container d-flex flex-row align-items-center justify-content-end">
@@ -25,9 +31,16 @@ class CartInfo extends React.Component {
                         </div>
                     </div>
                 </div>
+
+                <div>
+                    {cart.map((c, idx) =>
+                        <div key={idx}>{c.name} - {c.price} HRK</div>
+                    )}
+
+                </div>
             </div>
         )
     }
 }
 
-export default CartInfo;
+export default Cart;

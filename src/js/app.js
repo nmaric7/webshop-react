@@ -36,6 +36,10 @@ import DashboardPage from './views/pages/DashboardPage'
 import LoginPage from "./views/pages/LoginPage";
 import SignupPage from "./views/pages/SignupPage";
 import LogoutPage from "./views/pages/LogoutPage";
+import AdminDashboardPage from "./views/pages/admin/AdminDashboardPage";
+import AddProductPage from "./views/pages/admin/AddProductPage";
+import OrdersPage from "./views/pages/OrdersPage";
+import CartPage from "./views/pages/CartPage";
 
 
 ReactDOM.render(
@@ -54,8 +58,17 @@ ReactDOM.render(
                 <Route exact path="/">
                     <DashboardPage/>
                 </Route>
-                <Route path="/some2">
-                    <SomePage2/>
+                <Route exact path="/admin/dashboard">
+                    <AdminDashboardPage/>
+                </Route>
+                <Route exact path="/admin/addProduct">
+                    <AddProductPage/>
+                </Route>
+                <Route path="/cart">
+                    <CartPage/>
+                </Route>
+                <Route path="/orders">
+                    <OrdersPage/>
                 </Route>
                 <Route path="/some">
                     <ShopPage/>

@@ -1,22 +1,36 @@
 const types = {
-    FETCH_PRODUCTS: "shop/FETCH_PRODUCTS",
-    SET_PRODUCTS: "shop/SET_PRODUCTS",
+    GET_PRODUCTS: "shop/GET_PRODUCTS",
+    GET_PRODUCTS_SUCCESS: "shop/GET_PRODUCTS_SUCCESS",
+    GET_PRODUCTS_FAILURE: "shop/GET_PRODUCTS_FAILURE",
+    ADD_PRODUCT: "shop/ADD_PRODUCT",
+    ADD_PRODUCT_SUCCESS: "shop/ADD_PRODUCT_SUCCESS",
+    ADD_PRODUCT_FAILURE: "shop/ADD_PRODUCT_FAILURE",
     ERROR_FETCHING: "shop/ERROR_FETCHING",
     ADD_TO_CART:"shop/ADD_TO_CART",
-    ADD_TO_WISH_LIST:"shop/ADD_TO_WISH_LIST"
+    ADD_TO_WISH_LIST:"shop/ADD_TO_WISH_LIST",
+    ORDER: "shop/ORDER",
+    ORDER_SUCCESS: "shop/ORDER_SUCCESS",
+    ORDER_FAILURE: "shop/ORDER_FAILURE",
 };
 
 const actions = {
-    fetchProducts: (searchObj) => ({type: types.FETCH_PRODUCTS, payload: {...searchObj}}),
-    setProducts: (products) => ({type: types.SET_PRODUCTS, payload: products}),
-    errorFetching: (error) => ({type: types.ERROR_FETCHING, error: error}),
+    getProducts: (searchObj) => ({type: types.GET_PRODUCTS, payload: {...searchObj}}),
+    getProductsSuccess: (products) => ({type: types.GET_PRODUCTS_SUCCESS, payload: products}),
+    getProductsFailure: (error) => ({type: types.GET_PRODUCTS_FAILURE, error: error}),
+    addProduct: () => ({type: types.ADD_PRODUCT}),
+    addProductSuccess: (product) => ({type: types.ADD_PRODUCT_SUCCESS, payload: product}),
+    addProductFailure: (error) => ({type: types.ADD_PRODUCT_FAILURE, error: error}),
     addToCart: (product) => ({type:types.ADD_TO_CART, payload:product}),
     addToWishList: (product) => ({type:types.ADD_TO_WISH_LIST, payload:product}),
+    order: () => ({type: types.ORDER}),
+    orderSuccess: (product) => ({type: types.ORDER_SUCCESS, payload: product}),
+    orderFailure: (error) => ({type: types.ORDER_FAILURE, error: error})
 };
 
 const initialState = () => (
     {
         categories: [
+            {id:0, name:"---"},
             {id:1, name:"Computers & Laptops"},
             {id:2, name:"Cameras & Photos"},
             {id:3, name:"Hardware"},
@@ -39,7 +53,7 @@ const initialState = () => (
 
 const shop = (state = initialState(), action) => {
     switch (action.type) {
-        case types.FETCH_PRODUCTS:
+        case types.GET_PRODUCTS:
             return {
                 ...state,
                 loading: true,
@@ -47,11 +61,36 @@ const shop = (state = initialState(), action) => {
                 category: (action.payload && action.payload.category? action.payload.category : null),
                 error:null
             };
-        case types.SET_PRODUCTS:
+        case types.GET_PRODUCTS_SUCCESS:
             return {
                 ...state,
                 list: action.payload,
                 loading: false
+            };
+        case types.GET_PRODUCTS_FAILURE:
+            return {
+                ...state,
+                list: [],
+                loading: false,
+                error: action.error
+            };
+        case types.ADD_PRODUCT:
+            return {
+                ...state,
+                loading: true,
+                error: null
+            };
+        case types.ADD_PRODUCT_SUCCESS:
+            return {
+                ...state,
+                list: [...state.list, action.payload],
+                loading: false
+            };
+        case types.ADD_PRODUCT_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.error
             };
         case types.ERROR_FETCHING:
             return {
@@ -74,6 +113,24 @@ const shop = (state = initialState(), action) => {
                     ...state.wishList,
                     action.payload
                 ]
+            };
+        case types.ORDER:
+            return {
+                ...state,
+                loading: true,
+                error: null
+            };
+        case types.ORDER_SUCCESS:
+            return {
+                ...state,
+                list: [...state.list, action.payload],
+                loading: false
+            };
+        case types.ORDER_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.error
             };
 
         default:

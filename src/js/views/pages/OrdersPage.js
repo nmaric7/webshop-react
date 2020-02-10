@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {addToCart, addToWishList, getProducts} from './../../redux/services/shop.services';
+import {getProducts, addToCart, addToWishList} from './../../redux/services/shop.services';
 
 function mapStateToProps(state) {
     return {
@@ -29,7 +29,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-class ShopPage extends Component {
+class OrdersPage extends Component {
 
     constructor(props) {
         super(props);
@@ -164,4 +164,4 @@ class ShopPage extends Component {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ShopPage);
+)(OrdersPage);
