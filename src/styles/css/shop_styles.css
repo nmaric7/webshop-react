@@ -754,6 +754,17 @@ select option
 	color: #a3a3a3;
 	margin-top: -2px;
 }
+.cart_item_price
+{
+	font-size: 14px;
+	color: #a3a3a3;
+	margin-top: -2px;
+}.cart_item_name
+{
+	font-size: 14px;
+	color: #a3a3a3;
+	margin-top: -2px;
+}
 
 /*********************************
 3.3 Main Navigation

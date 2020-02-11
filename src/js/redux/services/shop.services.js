@@ -117,12 +117,12 @@ const addToCart = (item) => {
     }
 };
 
-const order = (cart) => dispatch => {
+const order = (request) => dispatch => {
     dispatch(shopActions.order());
     return serverCall({
         method: 'POST',
         url: '/orders/saveorder',
-        data: {productDtos: cart}
+        data: request
     })
         .then(res => {
             dispatch(shopActions.orderSuccess(res.data));
@@ -132,9 +132,14 @@ const order = (cart) => dispatch => {
         })
 };
 
+const applyCoupon = (coupon) => dispatch => {
+    dispatch(shopActions.applyCoupon(coupon));
+};
+
 export {
     getProducts,
     addProduct,
     addToCart,
-    order
+    order,
+    applyCoupon
 }

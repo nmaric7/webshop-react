@@ -7,11 +7,9 @@ import AddProduct from "../../components/AddProduct";
 class AddProductPage extends Component {
 
     render() {
-        const {user, auth, categories, onAddProduct} = this.props;
+        const {categories, onAddProduct} = this.props;
         return (
             <div className={'container'}>
-                <h3>Add Product</h3>
-                <Navigation user={user} auth={auth}/>
                 <AddProduct categories={categories} onAddProduct={onAddProduct}/>
             </div>
         );

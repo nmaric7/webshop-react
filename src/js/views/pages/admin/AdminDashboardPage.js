@@ -8,12 +8,9 @@ import ProductList from "../../components/ProductList";
 class AdminDashboardPage extends Component {
 
     render() {
-        const {user, auth, products} = this.props;
+        const {products} = this.props;
         return (
             <div className={'container'}>
-                <h3>Admin Dashboard</h3>
-                <Navigation user={user} auth={auth}/>
-
                 <Link to={'/admin/addProduct'}>
                     Add new product
                 </Link>

@@ -11,6 +11,7 @@ const types = {
     ORDER: "shop/ORDER",
     ORDER_SUCCESS: "shop/ORDER_SUCCESS",
     ORDER_FAILURE: "shop/ORDER_FAILURE",
+    APPLY_COUPON: 'shop/APPLY_COUPON'
 };
 
 const actions = {
@@ -24,7 +25,8 @@ const actions = {
     addToWishList: (product) => ({type:types.ADD_TO_WISH_LIST, payload:product}),
     order: () => ({type: types.ORDER}),
     orderSuccess: (product) => ({type: types.ORDER_SUCCESS, payload: product}),
-    orderFailure: (error) => ({type: types.ORDER_FAILURE, error: error})
+    orderFailure: (error) => ({type: types.ORDER_FAILURE, error: error}),
+    applyCoupon: (coupon) => ({type: types.APPLY_COUPON, payload: coupon})
 };
 
 const initialState = () => (
@@ -41,12 +43,18 @@ const initialState = () => (
             {id:8, name:"Video Games & Consoles"},
             {id:9, name:"Accessories"}
         ],
+        coupons: [
+            {id: 'COUPON10', amount: 10},
+            {id: 'COUPON20', amount: 20},
+            {id: 'COUPON50', amount: 50}
+        ],
         query: "",
         category: null,
         list: [],
         loading: false,
         error: null,
         cart:[],
+        coupon: null,
         wishList:[]
     }
 );
@@ -123,7 +131,8 @@ const shop = (state = initialState(), action) => {
         case types.ORDER_SUCCESS:
             return {
                 ...state,
-                list: [...state.list, action.payload],
+                cart: [],
+                coupon: null,
                 loading: false
             };
         case types.ORDER_FAILURE:
@@ -131,6 +140,11 @@ const shop = (state = initialState(), action) => {
                 ...state,
                 loading: false,
                 error: action.error
+            };
+        case types.APPLY_COUPON:
+            return {
+                ...state,
+                coupon: action.payload
             };
 
         default:

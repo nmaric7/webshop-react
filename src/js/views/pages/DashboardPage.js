@@ -3,8 +3,10 @@ import {connect} from 'react-redux';
 import {currentUser} from '../../redux/services/dashboard.services';
 import Navigation from "../components/Navigation";
 import ProductList from "../components/ProductList";
-import {addToCart, getProducts} from "../../redux/services/shop.services";
+import {addToCart, getProducts, applyCoupon, order} from "../../redux/services/shop.services";
 import CartInfo from "../components/CartInfo";
+import Row from "reactstrap/lib/Row";
+import Col from "reactstrap/lib/Col";
 
 class DashboardPage extends Component {
 
@@ -17,12 +19,19 @@ class DashboardPage extends Component {
     }
 
     render() {
-        const {user, auth, products, addToCart, cart} = this.props;
+        const {products, addToCart, cart, coupon, coupons, applyCoupon, order} = this.props;
         return (
             <div className={'container'}>
-                <Navigation user={user} auth={auth}/>
-                <ProductList products={products} addToCart={addToCart}/>
-                <CartInfo cart={cart}/>
+                <Row>
+                    <Col xs={8}>
+                        <ProductList products={products} addToCart={addToCart}/>
+                    </Col>
+                    <Col />
+                    <Col xs={3}>
+                        <CartInfo cart={cart} coupon={coupon} coupons={coupons}
+                                  applyCoupon={applyCoupon} order={order}/>
+                    </Col>
+                </Row>
             </div>
         );
     }
@@ -33,7 +42,9 @@ const mapStateToProps = state => {
         user: state.dashboard.user,
         auth: state.auth,
         products: state.shop.list,
-        cart: state.shop.cart
+        cart: state.shop.cart,
+        coupon: state.shop.coupon,
+        coupons: state.shop.coupons
     };
 };
 
@@ -41,8 +52,9 @@ const mapDispatchToProps = dispatch => {
     return {
         currentUser: () => dispatch(currentUser()),
         getProducts: (searchObj) => dispatch(getProducts(searchObj)),
-        addToCart: (product) => dispatch(addToCart(product))
-
+        addToCart: (product) => dispatch(addToCart(product)),
+        applyCoupon: (coupon) => dispatch(applyCoupon(coupon)),
+        order: (request) => dispatch(order(request))
     };
 };
 

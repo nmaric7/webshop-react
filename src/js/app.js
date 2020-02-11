@@ -24,13 +24,8 @@ import './../styles/css/shop_responsive.css';
 import './../styles/css/shop_styles.css';
 
 import './../plugins/fontawesome-free-5.0.1/css/fontawesome-all.css';
-
-
 //import Header from "./views/components/Header";
-import Template from "./views/components/Template";
-import HomePage from "./views/pages/HomePage";
 import ShopPage from "./views/pages/ShopPage";
-import SomePage2 from "./views/pages/SomePage2";
 
 import DashboardPage from './views/pages/DashboardPage'
 import LoginPage from "./views/pages/LoginPage";
@@ -40,40 +35,50 @@ import AdminDashboardPage from "./views/pages/admin/AdminDashboardPage";
 import AddProductPage from "./views/pages/admin/AddProductPage";
 import OrdersPage from "./views/pages/OrdersPage";
 import CartPage from "./views/pages/CartPage";
+import Template from "./views/components/Template";
 
+const TemplateRoutes = () =>
+    <Switch>
+        <Template>
+            <Route exact path="/">
+                <DashboardPage/>
+            </Route>
+            <Route exact path="/admin/dashboard">
+                <AdminDashboardPage/>
+            </Route>
+            <Route exact path="/admin/addProduct">
+                <AddProductPage/>
+            </Route>
+            <Route path="/cart">
+                <CartPage/>
+            </Route>
+            <Route path="/orders">
+                <OrdersPage/>
+            </Route>
+            <Route path="/some">
+                <ShopPage/>
+            </Route>
+        </Template>
+    </Switch>;
+
+const AllRoutes = () =>
+    <Switch>
+        <Route exact path="/login">
+            <LoginPage/>
+        </Route>
+        <Route exact path="/signup">
+            <SignupPage/>
+        </Route>
+        <Route exact path="/logout">
+            <LogoutPage/>
+        </Route>
+        <Route path={'/'} component={TemplateRoutes}/>
+    </Switch>;
 
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <Switch>
-                <Route exact path="/login">
-                    <LoginPage/>
-                </Route>
-                <Route exact path="/signup">
-                    <SignupPage/>
-                </Route>
-                <Route exact path="/logout">
-                    <LogoutPage/>
-                </Route>
-                <Route exact path="/">
-                    <DashboardPage/>
-                </Route>
-                <Route exact path="/admin/dashboard">
-                    <AdminDashboardPage/>
-                </Route>
-                <Route exact path="/admin/addProduct">
-                    <AddProductPage/>
-                </Route>
-                <Route path="/cart">
-                    <CartPage/>
-                </Route>
-                <Route path="/orders">
-                    <OrdersPage/>
-                </Route>
-                <Route path="/some">
-                    <ShopPage/>
-                </Route>
-            </Switch>
+            <AllRoutes/>
         </Router>
     </Provider>,
     document.getElementById("app")
