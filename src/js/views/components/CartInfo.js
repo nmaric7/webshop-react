@@ -41,7 +41,7 @@ class CartInfo extends React.Component {
         let sum = cart.map(e => !!e.discount ? (e.price - ((e.discount * e.price) / 100)) : e.price).reduce((a, b) => a + b, 0);
         let couponAmount = 0;
         if (!!coupon) {
-            couponAmount = coupons.find(c => c.id === coupon).amount;
+            couponAmount = coupons.find(c => c.id === coupon).amount * sum / 100;
             sum = sum - couponAmount;
         }
 
