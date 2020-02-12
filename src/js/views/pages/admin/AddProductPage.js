@@ -1,16 +1,35 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Navigation from '../../components/Navigation';
 import {addProduct} from '../../../redux/services/shop.services';
 import AddProduct from "../../components/AddProduct";
+import {Redirect} from "react-router-dom";
 
 class AddProductPage extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {added: false};
+    }
+
+    handleAddProduct = (product) => {
+        const {onAddProduct} = this.props;
+        this.setState({added: true}, () => onAddProduct(product));
+    };
+
     render() {
-        const {categories, onAddProduct} = this.props;
+        const {categories} = this.props;
+        const {added} = this.state;
+
+        if (added) {
+            return <Redirect
+                to={{
+                    pathname: "/admin/dashboard",
+                    state: { from: this.props.location }
+                }}/>;
+        }
         return (
             <div className={'container'}>
-                <AddProduct categories={categories} onAddProduct={onAddProduct}/>
+                <AddProduct categories={categories} onAddProduct={this.handleAddProduct}/>
             </div>
         );
     }

@@ -4,6 +4,7 @@ import Navigation from '../../components/Navigation';
 import {getProducts} from '../../../redux/services/shop.services';
 import {Link} from "react-router-dom";
 import ProductList from "../../components/ProductList";
+import {Alert} from "reactstrap";
 
 class AdminDashboardPage extends Component {
 
@@ -12,7 +13,10 @@ class AdminDashboardPage extends Component {
         return (
             <div className={'container'}>
                 <Link to={'/admin/addProduct'}>
-                    Add new product
+                    <Alert color="info">
+                        + Dodaj novi proizvod
+                    </Alert>
+
                 </Link>
                 <ProductList products={products} />
             </div>

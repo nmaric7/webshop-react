@@ -21,7 +21,7 @@ class SignupPage extends Component {
                 <h2 className={'text-center'} style={{'padding': '20px'}}>
                     <span className={'font-weight-bold'}>Webshop</span>.com
                 </h2>
-                <h3>Welcome a new user!</h3>
+                <h3>Dobro došao, novi korisniče!</h3>
 
                 {error && error.message &&
                 <div className="alert alert-danger">
@@ -29,7 +29,7 @@ class SignupPage extends Component {
                 </div>
                 }
                 <Signup onSignup={onSignup}/>
-                <Link to={'/login'}>Login</Link>
+                <Link to={'/login'}>Prijava</Link>
             </div>
         )
     }

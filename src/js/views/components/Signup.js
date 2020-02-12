@@ -42,20 +42,20 @@ class Signup extends Component {
             <div>
                 <Form className={'login-form'}>
                     <FormGroup>
-                        <Label>Name</Label>
-                        <Input type={'text'} placeholder={'Name'} onChange={this.handleChangeName}/>
+                        <Label>Ime</Label>
+                        <Input type={'text'} placeholder={'Ime'} onChange={this.handleChangeName}/>
                     </FormGroup>
                     <FormGroup>
                         <Label>Email</Label>
                         <Input type={'email'} placeholder={'Email'} onChange={this.handleChangeEmail}/>
                     </FormGroup>
                     <FormGroup>
-                        <Label>Password</Label>
-                        <Input type={'password'} placeholder={'Password'} onChange={this.handleChangePassword}/>
+                        <Label>Lozinka</Label>
+                        <Input type={'password'} placeholder={'Lozinka'} onChange={this.handleChangePassword}/>
                     </FormGroup>
                     <FormGroup>
-                        <Label>Re-Password</Label>
-                        <Input type={'password'} placeholder={'Password'} onChange={this.handleChangeRePassword}/>
+                        <Label>Ponovno Lozinka</Label>
+                        <Input type={'password'} placeholder={'Ponovno Lozinka'} onChange={this.handleChangeRePassword}/>
                     </FormGroup>
                     <FormGroup check>
                         <Label check>
@@ -63,7 +63,7 @@ class Signup extends Component {
                         </Label>
                     </FormGroup>
                     <Button className={'btn-lg btn-dark btn-block'} onClick={this.handleSignup}>
-                        Sign up
+                        Registracija
                     </Button>
                 </Form>
             </div>

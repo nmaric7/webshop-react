@@ -9,16 +9,16 @@ class Navigation extends React.Component {
         return (
             <ul className="standard_dropdown main_nav_dropdown">
                 <li>
-                    <NavLink to={"/"} activeClassName={"active"} exact={true} className={"nav-link"}>Dashboard</NavLink>
+                    <NavLink to={"/"} activeClassName={"active"} exact={true} className={"nav-link"}>Proizvodi</NavLink>
                 </li>
                 {auth.authenticated &&
                     <li>
-                        <NavLink to={"/orders"} activeClassName={"active"} className={"nav-link"}>Orders</NavLink>
+                        <NavLink to={"/orders"} activeClassName={"active"} className={"nav-link"}>Narudžbe</NavLink>
                     </li>
                 }
                 {admin &&
                     <li>
-                        <NavLink to={"/admin/dashboard"} activeClassName={"active"} className={"nav-link"}>Admin</NavLink>
+                        <NavLink to={"/admin/dashboard"} activeClassName={"active"} className={"nav-link"}>Administracija proizvoda</NavLink>
                     </li>
                 }
                 {auth.authenticated &&
@@ -28,12 +28,12 @@ class Navigation extends React.Component {
                 }
                 {!auth.authenticated &&
                     <li>
-                        <NavLink to={"/login"} activeClassName={"active"} className={"nav-link"}>Login</NavLink>
+                        <NavLink to={"/login"} activeClassName={"active"} className={"nav-link"}>Prijava</NavLink>
                     </li>
                 }
                 {auth.authenticated &&
                     <li>
-                        <NavLink to={"/logout"} activeClassName={"active"} className={"nav-link"}>Logout</NavLink>
+                        <NavLink to={"/logout"} activeClassName={"active"} className={"nav-link"}>Odjava</NavLink>
                     </li>
                 }
 

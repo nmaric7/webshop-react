@@ -7,6 +7,7 @@ import {addToCart, getProducts, applyCoupon, order} from "../../redux/services/s
 import CartInfo from "../components/CartInfo";
 import Row from "reactstrap/lib/Row";
 import Col from "reactstrap/lib/Col";
+import {Alert} from "reactstrap";
 
 class DashboardPage extends Component {
 
@@ -19,7 +20,7 @@ class DashboardPage extends Component {
     }
 
     render() {
-        const {products, addToCart, cart, coupon, coupons, applyCoupon, order} = this.props;
+        const {products, addToCart, cart, coupon, coupons, applyCoupon, order, orderSuccessMsg} = this.props;
         return (
             <div className={'container'}>
                 <Row>
@@ -28,8 +29,13 @@ class DashboardPage extends Component {
                     </Col>
                     <Col xs={4} className={""}>
                         <div className={"card mt-5"}>
+                            {orderSuccessMsg &&
+                                <Alert color="success">
+                                    {orderSuccessMsg}
+                                </Alert>
+                            }
                             <CartInfo cart={cart} coupon={coupon} coupons={coupons}
-                                      applyCoupon={applyCoupon} order={order}/>
+                                      applyCoupon={applyCoupon} order={order} />
                         </div>
                     </Col>
                 </Row>
@@ -45,7 +51,8 @@ const mapStateToProps = state => {
         products: state.shop.list,
         cart: state.shop.cart,
         coupon: state.shop.coupon,
-        coupons: state.shop.coupons
+        coupons: state.shop.coupons,
+        orderSuccessMsg: state.shop.orderSuccessMsg
     };
 };
 

@@ -24,14 +24,14 @@ class LoginPage extends Component {
                 <h2 className={'text-center'} style={{'padding': '20px'}}>
                     <span className={'font-weight-bold'}>Webshop</span>.com
                 </h2>
-                <h3>Welcome back!</h3>
+                <h3>Dobro došao, nazad!</h3>
                 {error && error.message &&
                 <div className="alert alert-danger">
                     <strong>Error!</strong> {error.message}
                 </div>
                 }
                 <Login onLogin={onLogin} />
-                <Link to={'/signup'}>Signup</Link>
+                <Link to={'/signup'}>Registracija</Link>
             </div>
         )
     }

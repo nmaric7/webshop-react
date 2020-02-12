@@ -31,15 +31,15 @@ class Login extends Component {
                 <Form className={'login-form'}>
                     <FormGroup>
                         <Label>Email</Label>
-                        <Input type={'email'} placeholder={'email'} onChange={this.handleEmailChange}/>
+                        <Input type={'email'} placeholder={'Email'} onChange={this.handleEmailChange}/>
                     </FormGroup>
                     <FormGroup>
-                        <Label>Password</Label>
-                        <Input type={'password'} placeholder={'Password'} onChange={this.handlePasswordChange}/>
+                        <Label>Lozinka</Label>
+                        <Input type={'password'} placeholder={'Lozinka'} onChange={this.handlePasswordChange}/>
                     </FormGroup>
 
                     <Button className={'btn-lg btn-dark btn-block'} onClick={this.handleLogin}>
-                        Log In
+                        Prijava
                     </Button>
                 </Form>
             </div>);

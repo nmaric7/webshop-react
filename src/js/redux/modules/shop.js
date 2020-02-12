@@ -12,7 +12,10 @@ const types = {
     ORDER_SUCCESS: "shop/ORDER_SUCCESS",
     ORDER_FAILURE: "shop/ORDER_FAILURE",
     APPLY_COUPON: 'shop/APPLY_COUPON',
-    INIT_CART: 'shop/INIT_CART'
+    INIT_CART: 'shop/INIT_CART',
+    GET_ORDERS: 'shop/GET_ORDERS',
+    GET_ORDERS_SUCCESS: 'shop/GET_ORDERS_SUCCESS',
+    GET_ORDERS_FAILURE: "shop/GET_ORDERS_FAILURE",
 };
 
 const actions = {
@@ -25,10 +28,14 @@ const actions = {
     addToCart: (product) => ({type:types.ADD_TO_CART, payload:product}),
     addToWishList: (product) => ({type:types.ADD_TO_WISH_LIST, payload:product}),
     order: () => ({type: types.ORDER}),
-    orderSuccess: (product) => ({type: types.ORDER_SUCCESS, payload: product}),
+    orderSuccess: (msg) => ({type: types.ORDER_SUCCESS, payload: msg}),
     orderFailure: (error) => ({type: types.ORDER_FAILURE, error: error}),
     applyCoupon: (coupon) => ({type: types.APPLY_COUPON, payload: coupon}),
-    initCart: () => ({type: types.INIT_CART})
+    initCart: () => ({type: types.INIT_CART}),
+    getOrders: () => ({type: types.GET_ORDERS}),
+    getOrdersSuccess: (orders) => ({type: types.GET_ORDERS_SUCCESS, payload: orders}),
+    getOrdersFailure: (error) => ({type: types.GET_ORDERS_FAILURE, error: error}),
+
 };
 
 const initialState = () => (
@@ -57,7 +64,9 @@ const initialState = () => (
         error: null,
         cart:[],
         coupon: null,
-        wishList:[]
+        wishList:[],
+        orders: [],
+        orderSuccessMsg: null
     }
 );
 
@@ -111,6 +120,7 @@ const shop = (state = initialState(), action) => {
         case types.ADD_TO_CART:
             return {
                 ...state,
+                orderSuccessMsg: null,
                 cart: [
                     ...state.cart,
                     action.payload
@@ -133,6 +143,7 @@ const shop = (state = initialState(), action) => {
         case types.ORDER_SUCCESS:
             return {
                 ...state,
+                orderSuccessMsg: action.payload,
                 cart: [],
                 coupon: null,
                 loading: false
@@ -155,6 +166,26 @@ const shop = (state = initialState(), action) => {
                 cart: [],
                 coupon: null
             };
+        case types.GET_ORDERS:
+            return {
+                ...state,
+                loading: true,
+                error:null
+            };
+        case types.GET_ORDERS_SUCCESS:
+            return {
+                ...state,
+                orders: action.payload,
+                loading: false
+            };
+        case types.GET_ORDERS_FAILURE:
+            return {
+                ...state,
+                orders: [],
+                loading: false,
+                error: action.error
+            };
+
         default:
             return state;
     }

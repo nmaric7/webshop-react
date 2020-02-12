@@ -94,7 +94,7 @@ const addProduct = (product) => dispatch => {
     dispatch(shopActions.addProduct());
     return serverCall({
         method: 'POST',
-        url: '/products/add',
+        url: '/admin/add',
         data: product
     })
         .then(res => {
@@ -136,10 +136,25 @@ const applyCoupon = (coupon) => dispatch => {
     dispatch(shopActions.applyCoupon(coupon));
 };
 
+const getOrders = () => dispatch => {
+    dispatch(shopActions.getOrders());
+    return serverCall({
+        method: 'GET',
+        url: '/orders/getorders'
+    })
+        .then(res => {
+            dispatch(shopActions.getOrdersSuccess(res.data));
+        })
+        .catch(error => {
+            dispatch(shopActions.getOrdersFailure(error));
+        })
+};
+
 export {
     getProducts,
     addProduct,
     addToCart,
     order,
-    applyCoupon
+    applyCoupon,
+    getOrders
 }

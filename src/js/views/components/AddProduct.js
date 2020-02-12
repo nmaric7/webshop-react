@@ -46,15 +46,15 @@ class AddProduct extends Component {
             <div>
                 <Form className={'add-product-form'}>
                     <FormGroup>
-                        <Label>Name</Label>
-                        <Input placeholder={'Name'} onChange={this.handleNameChange}/>
+                        <Label>Naziv</Label>
+                        <Input placeholder={'Naziv'} onChange={this.handleNameChange}/>
                     </FormGroup>
                     <FormGroup>
-                        <Label>Description</Label>
-                        <Input placeholder={'Description'} onChange={this.handleDescriptionChange}/>
+                        <Label>Opis</Label>
+                        <Input placeholder={'Opis'} onChange={this.handleDescriptionChange}/>
                     </FormGroup>
                     <FormGroup>
-                        <Label for={'category'}>Category</Label>
+                        <Label for={'category'}>Kategorija</Label>
                         <Input type={'select'} name={'category'} id={'category'} onChange={this.handleCategoryChange}>
                             {categories.map((c, idx) =>
                                 <option key={idx} value={c.id}>{c.name}</option>
@@ -62,23 +62,19 @@ class AddProduct extends Component {
                         </Input>
                     </FormGroup>
                     <FormGroup>
-                        <Label>Price</Label>
-                        <Input placeholder={'Price'} onChange={this.handlePriceChange}/>
+                        <Label>Cijena</Label>
+                        <Input placeholder={'Cijena'} onChange={this.handlePriceChange}/>
                     </FormGroup>
                     <FormGroup>
-                        <Label>Discount</Label>
-                        <Input placeholder={'Discount'} onChange={this.handleDiscountChange}/>
+                        <Label>Popust</Label>
+                        <Input placeholder={'Popust'} onChange={this.handleDiscountChange}/>
                     </FormGroup>
                     <FormGroup>
-                        <Label for={'img'}>Image</Label>
+                        <Label for={'img'}>Photo</Label>
                         <Input type={'file'} name={'img'} id={'img'} onChange={this.handleImageChange}/>
-                        <FormText color="muted">
-                            This is some placeholder block-level help text for the above input.
-                            It's a bit lighter and easily wraps to a new line.
-                        </FormText>
                     </FormGroup>
                     <Button className={'btn-lg btn-dark btn-block'} onClick={this.handleAddProduct}>
-                        Add Product
+                        Dodaj
                     </Button>
                 </Form>
 
