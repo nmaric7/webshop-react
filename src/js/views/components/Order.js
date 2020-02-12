@@ -24,7 +24,7 @@ class Order extends Component {
                 <div color="primary" onClick={this.toggle} style={{ marginBottom: '1rem', display: 'block'}} >
                     <Row style={{padding: '10px'}}>
                         <Col xs={2}>{order.orderId}</Col>
-                        <Col xs={3}>{moment(order.createdAt).format('DD.MM.YYYY, hh:mm:ss')}</Col>
+                        <Col xs={3}>{moment(order.createdAt).format('DD.MM.YYYY, HH:mm:ss')}</Col>
                         <Col xs={4}>{order.username}</Col>
                         <Col xs={3} className={'text-right'}>{order.price} HRK</Col>
                     </Row>
