@@ -35,7 +35,7 @@ class Order extends Component {
                             {order.productDtos.map((p, idx) =>
                                 <Row key={idx} style={{padding: '10px'}}>
                                     <Col xs={8}>{p.name}</Col>
-                                    <Col xs={4} className={'text-right'}>
+                                    <Col xs={4} className={'text-right text-muted'}>
                                         {!!p.discount &&
                                             <div>
                                                 {p.price - (p.price * p.discount / 100)} HRK
