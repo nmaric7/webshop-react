@@ -26,10 +26,11 @@ class DashboardPage extends Component {
                     <Col xs={8}>
                         <ProductList products={products} addToCart={addToCart}/>
                     </Col>
-                    <Col />
-                    <Col xs={3}>
-                        <CartInfo cart={cart} coupon={coupon} coupons={coupons}
-                                  applyCoupon={applyCoupon} order={order}/>
+                    <Col xs={4} className={""}>
+                        <div className={"card mt-5"}>
+                            <CartInfo cart={cart} coupon={coupon} coupons={coupons}
+                                      applyCoupon={applyCoupon} order={order}/>
+                        </div>
                     </Col>
                 </Row>
             </div>

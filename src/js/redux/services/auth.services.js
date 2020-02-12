@@ -1,8 +1,10 @@
 import {serverCall} from './common.services';
 import {authActions} from '../modules/auth';
+import {shopActions} from '../modules/shop';
 
 const login = (request) => dispatch => {
     dispatch(authActions.login());
+    dispatch(shopActions.initCart());
     return serverCall({
         method: 'POST',
         url: '/auth/login',

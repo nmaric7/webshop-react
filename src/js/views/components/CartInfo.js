@@ -2,7 +2,7 @@ import React from 'react';
 import cartImage from "../../../images/cart.png";
 import CartItem from "./CartItem";
 import FormGroup from "reactstrap/lib/FormGroup";
-import {Button, Form, Input, Label} from "reactstrap";
+import {Button, Form, Input, InputGroup, InputGroupAddon, Label} from "reactstrap";
 import Row from "reactstrap/lib/Row";
 import Col from "reactstrap/lib/Col";
 
@@ -24,8 +24,7 @@ class CartInfo extends React.Component {
         const c = coupons.find(c => c.id === this.state.coupon);
         if (!c) {
             this.setState({couponExists: false});
-        }
-        else {
+        } else {
             applyCoupon(this.state.coupon);
         }
     };
@@ -45,55 +44,69 @@ class CartInfo extends React.Component {
             sum = sum - couponAmount;
         }
 
+        const CartItemNew = ({item}) => (
+            <div
+                className={"border-top pt-3 d-flex flex-row align-items-start justify-content-between mt-2 "}>
+                <span className={"cart_item_name"}>{item.name}</span>
+                <span className={"cart_item_price"}>{item.price} HRK</span>
+            </div>
+        );
+
+        const basketNotEmpty = (cart && cart.length > 0);
+
         return (
-            <div>
-                <div className="wishlist_cart d-flex flex-row align-items-center justify-content-end">
-                    <div className="cart">
-                        <div
-                            className="cart_container d-flex flex-row align-items-center justify-content-end">
-                            <div className="cart_icon">
-                                <img src={cartImage} alt=""/>
-                                <div className="cart_count">
-                                    <span>{cart ? cart.length : 0}</span>
-                                </div>
+            <div className={"p-2"}>
+                <div className={"d-flex flex-column align-items-stretch justify-content-start"}>
+
+                    <div className="mb-3 cart_container d-flex flex-row align-items-center justify-content-center">
+                        <div className="cart_icon">
+                            <img src={cartImage} alt=""/>
+
+                            <div className="cart_count">
+                                <span>{basketNotEmpty ? cart.length : 0}</span>
                             </div>
-                            <div className="cart_content">
-                                <div className="cart_text">Košarica</div>
+
+                        </div>
+                        <div className="cart_content">
+                            <div className="cart_text">
+                                Košarica {basketNotEmpty ? "":" je prazna"}
                             </div>
                         </div>
                     </div>
+
+                    {cart.map((item, idx) =>
+                        <CartItemNew item={item} key={idx}/>
+                    )}
+
+                    {!!coupon &&
+                    <div
+                        className={"border-top pt-3 d-flex flex-row align-items-start justify-content-between mt-2 "}>
+                        <span className={"cart_item_name  text-danger"}>{coupon}</span>
+                        <span className={"cart_item_name text-danger"}>-{couponAmount} HRK</span>
+                    </div>
+                    }
+
+                    {basketNotEmpty &&
+                    <div
+                        className={"border-top pt-3 d-flex flex-row align-items-start justify-content-between mt-2 "}>
+                        <strong className={"cart_item_name"}>UKUPNO</strong>
+                        <strong className={"cart_item_name"}>{sum} HRK</strong>
+                    </div>
+                    }
+
+                    {basketNotEmpty && !coupon &&
+                    <div className={"d-flex flex-column mt-5 p-2 bg-light align-items-end justify-content-between"}>
+                        <Input placeholder={'Kupon'} onChange={this.handleCouponChange}/>
+                        <a className={"btn btn-link text-info"} onClick={this.handleApplyCoupon}>Primjeni kupon</a>
+                    </div>
+                    }
+
                 </div>
-                {cart.map((item, idx) =>
-                    <CartItem key={idx} item={item} />
-                )}
 
-                {cart && cart.length > 0 && !coupon &&
-                    <Row>
-                        <Col xs={8}>
-                            <FormGroup>
-                                <Input placeholder={'Kupon'} onChange={this.handleCouponChange}/>
-                            </FormGroup>
-                        </Col>
-                        <Col xs={4}>
-                            <FormGroup>
-                                <Button onClick={this.handleApplyCoupon}>Primjeni</Button>
-                            </FormGroup>
-                        </Col>
-                    </Row>
-                }
-                {!!coupon &&
-                    <Row>
-                        <Col xs={6}>{coupon}</Col>
-                        <Col className={'text-right cart_price'} xs={6}><span>-{couponAmount} HRK</span></Col>
-                    </Row>
-                }
-
-                <Row>
-                    <Col xs={12} className={'text-right'}>{sum} HRK</Col>
-                </Row>
-
-                {cart && cart.length > 0 &&
-                    <Button onClick={this.handleOrder}>Naruči</Button>
+                {basketNotEmpty &&
+                <div className={"form-group mt-3"}>
+                    <button className={"btn btn-warning btn-block"} onClick={this.handleOrder}>Plati {sum} HRK </button>
+                </div>
                 }
             </div>
         )

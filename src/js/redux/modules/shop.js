@@ -11,7 +11,8 @@ const types = {
     ORDER: "shop/ORDER",
     ORDER_SUCCESS: "shop/ORDER_SUCCESS",
     ORDER_FAILURE: "shop/ORDER_FAILURE",
-    APPLY_COUPON: 'shop/APPLY_COUPON'
+    APPLY_COUPON: 'shop/APPLY_COUPON',
+    INIT_CART: 'shop/INIT_CART'
 };
 
 const actions = {
@@ -26,7 +27,8 @@ const actions = {
     order: () => ({type: types.ORDER}),
     orderSuccess: (product) => ({type: types.ORDER_SUCCESS, payload: product}),
     orderFailure: (error) => ({type: types.ORDER_FAILURE, error: error}),
-    applyCoupon: (coupon) => ({type: types.APPLY_COUPON, payload: coupon})
+    applyCoupon: (coupon) => ({type: types.APPLY_COUPON, payload: coupon}),
+    initCart: () => ({type: types.INIT_CART})
 };
 
 const initialState = () => (
@@ -147,6 +149,12 @@ const shop = (state = initialState(), action) => {
                 coupon: action.payload
             };
 
+        case types.INIT_CART:
+            return {
+                ...state,
+                cart: [],
+                coupon: null
+            };
         default:
             return state;
     }
