@@ -21,7 +21,7 @@ class Order extends Component {
 
         return (
             <div>
-                <div color="primary" onClick={this.toggle} style={{ margin: '1rem', display: 'block'}} >
+                <div color="primary" onClick={this.toggle} style={{ margin: '1rem', display: 'block', cursor: 'pointer'}} >
                     <Row style={{padding: '10px'}}>
                         <Col xs={2}>{order.orderId}</Col>
                         <Col xs={3}>{moment(order.createdAt).format('DD.MM.YYYY, HH:mm:ss')}</Col>
