@@ -5,19 +5,23 @@ import {getProducts} from '../../../redux/services/shop.services';
 import {Link} from "react-router-dom";
 import ProductList from "../../components/ProductList";
 import {Alert} from "reactstrap";
+import Col from "reactstrap/lib/Col";
 
 class AdminDashboardPage extends Component {
 
     render() {
-        const {products} = this.props;
+        const {products, getProducts} = this.props;
         return (
             <div className={'container'}>
-                <Link to={'/admin/addProduct'}>
-                    <Alert color="info">
-                        + Dodaj novi proizvod
-                    </Alert>
+                <div className={'alert alert-info'} style={{margin: '1rem'}}>
+                    <Link to={'/admin/addProduct'} style={{margin: '1rem'}}>
+                        <span style={{ cursor: 'pointer'}} >
+                            + Dodaj novi proizvod
+                        </span>
+                    </Link>
+                    <span style={{cursor: 'pointer', margin: '1rem'}} onClick={getProducts}>Osvježi</span>
+                </div>
 
-                </Link>
                 <ProductList products={products} />
             </div>
         );

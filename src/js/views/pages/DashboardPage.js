@@ -20,9 +20,13 @@ class DashboardPage extends Component {
     }
 
     render() {
-        const {products, addToCart, cart, coupon, coupons, applyCoupon, order, orderSuccessMsg} = this.props;
+        const {products, addToCart, cart, coupon, coupons, applyCoupon, order, orderSuccessMsg, getProducts} = this.props;
         return (
             <div className={'container'}>
+                <div className={'alert alert-info'} style={{margin: '1rem'}}>
+                    <span style={{cursor: 'pointer'}} onClick={getProducts}>Osvježi</span>
+                </div>
+
                 <Row>
                     <Col xs={8}>
                         <ProductList products={products} addToCart={addToCart}/>

@@ -5,6 +5,7 @@ import OrderList from "../components/OrderList";
 import Button from "reactstrap/lib/Button";
 import Row from "reactstrap/lib/Row";
 import Col from "reactstrap/lib/Col";
+import {Link} from "react-router-dom";
 
 class OrdersPage extends Component {
 
@@ -22,11 +23,9 @@ class OrdersPage extends Component {
         const {orders} = this.props;
         return (
             <div className={'container'}>
-                <Row>
-                    <Col xs={12} className={'text-right'} style={{margin: '10px'}}>
-                        <Button color={'info'} onClick={this.handleRefresh}>Osvježi</Button>
-                    </Col>
-                </Row>
+                <div className={'alert alert-info'} style={{margin: '1rem'}}>
+                    <span style={{cursor: 'pointer'}} onClick={this.handleRefresh}>Osvježi</span>
+                </div>
                 <OrderList orders={orders} />
             </div>
         );
